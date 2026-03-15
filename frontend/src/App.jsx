@@ -17,7 +17,14 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative">
+      {/* Global Background Effects */}
+      <div className="noise-overlay" />
+      <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div className="glow-orb cyan-orb" />
+        <div className="glow-orb magenta-orb" />
+      </div>
+
       <Navbar />
       
       <main className="flex-1">

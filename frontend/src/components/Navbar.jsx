@@ -9,207 +9,195 @@ const navLinks = [
   {
     name: 'Tools',
     children: [
-      { name: 'Salary Predictor', path: '/predictor', icon: '🎯' },
-      { name: 'CTC Calculator', path: '/calculator', icon: '🧮' },
-      { name: 'City Comparison', path: '/city-comparison', icon: '🏙️' },
-      { name: 'Skills Analysis', path: '/skills-analysis', icon: '🧠' },
+      { name: 'Salary Predictor', path: '/predictor', icon: '🎯', desc: 'AI-powered CTC prediction' },
+      { name: 'CTC Calculator', path: '/calculator', icon: '🧮', desc: 'Detailed salary breakdown' },
+      { name: 'City Comparison', path: '/city-comparison', icon: '🏙️', desc: 'Compare Indian cities' },
+      { name: 'Skills Analysis', path: '/skills-analysis', icon: '🧠', desc: 'Gap analysis & learning' },
     ]
   },
   { name: 'Dashboard', path: '/dashboard' },
+  { name: 'Compare', path: '/', hash: 'compare-jobs' },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
     setIsOpen(false);
-    setOpenDropdown(null);
   }, [location]);
 
   const isActive = (path) => location.pathname === path;
   const isGroupActive = (children) => children?.some(c => location.pathname === c.path);
 
+  const handleNavClick = (link) => {
+    if (link.hash) {
+      if (location.pathname !== '/') {
+        // Navigate to home first, then scroll
+        window.location.href = `/#${link.hash}`;
+      } else {
+        // Already on home, just scroll
+        const element = document.getElementById(link.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  };
+
   return (
-    <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? 'bg-dark-950/80 backdrop-blur-2xl border-b border-white/[0.06]'
-          : 'bg-transparent'
-      }`}
-    >
-      {/* Top accent line */}
-      <div className="h-[1px] bg-gradient-to-r from-transparent via-primary-500/60 to-transparent" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-
+    <>
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 rounded-2xl border ${
+          isScrolled
+            ? 'glass-panel py-2 border-white/10 shadow-[0_0_40px_rgba(0,0,0,0.5)]'
+            : 'bg-transparent py-4 border-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="relative w-9 h-9 flex items-center justify-center">
-              <div className="absolute inset-0 bg-primary-500/20 rounded-xl blur-sm group-hover:bg-primary-500/30 transition-all" />
-              <div className="relative bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl p-1.5">
-                <Zap className="h-5 w-5 text-white" />
-              </div>
-            </div>
-            <div>
-              <span className="text-lg font-heading font-bold text-white group-hover:text-primary-300 transition-colors">
-                Career<span className="gradient-text">Scope</span>
-              </span>
-            </div>
+          <Link to="/" className="flex items-center space-x-3 group">
+            <motion.div
+              whileHover={{ rotate: 180 }}
+              className="w-10 h-10 bg-cyan text-bg rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(0,255,224,0.4)]"
+            >
+              <Zap size={20} fill="currentColor" />
+            </motion.div>
+            <span className="text-2xl font-heading tracking-tighter text-white">
+              CAREER<span className="text-cyan italic">SCOPE</span>
+            </span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-1">
+          {/* Nav Links */}
+          <div className="hidden md:flex items-center space-x-2">
             {navLinks.map((link) =>
               link.children ? (
-                <div key={link.name} className="relative">
+                <div key={link.name} className="relative group/dropdown">
                   <button
-                    onClick={() => setOpenDropdown(openDropdown === link.name ? null : link.name)}
-                    onBlur={() => setTimeout(() => setOpenDropdown(null), 150)}
-                    className={`flex items-center space-x-1 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                      isGroupActive(link.children)
-                        ? 'text-primary-400 bg-primary-500/10'
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    className={`flex items-center gap-2 px-5 py-2 rounded-lg font-mono text-xs uppercase tracking-widest transition-all ${
+                      isGroupActive(link.children) ? 'text-cyan bg-cyan/5' : 'text-subtext hover:text-white'
                     }`}
                   >
-                    <span>{link.name}</span>
-                    <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openDropdown === link.name ? 'rotate-180' : ''}`} />
+                    {link.name} <ChevronDown size={12} />
                   </button>
-
-                  <AnimatePresence>
-                    {openDropdown === link.name && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute top-full left-0 mt-2 w-52 glass-card-glow py-2 overflow-hidden"
-                      >
-                        {link.children.map((child) => (
-                          <Link
-                            key={child.path}
-                            to={child.path}
-                            className={`flex items-center space-x-3 px-4 py-2.5 text-sm transition-all ${
-                              isActive(child.path)
-                                ? 'text-primary-400 bg-primary-500/10'
-                                : 'text-gray-400 hover:text-white hover:bg-white/5'
-                            }`}
-                          >
-                            <span className="text-base">{child.icon}</span>
-                            <span>{child.name}</span>
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <div className="absolute top-full left-0 mt-2 w-64 opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all duration-300 translate-y-2 group-hover/dropdown:translate-y-0">
+                    <div className="glass-panel p-2 border-white/10 shadow-2xl">
+                      {link.children.map((child) => (
+                        <Link
+                          key={child.path}
+                          to={child.path}
+                          className="flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors group/item"
+                        >
+                          <span className="text-2xl">{child.icon}</span>
+                          <div>
+                            <div className="text-sm font-bold text-white group-hover/item:text-cyan">{child.name}</div>
+                            <div className="text-[10px] text-subtext leading-tight">{child.desc}</div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 </div>
+              ) : link.hash ? (
+                <button
+                  key={link.name}
+                  onClick={() => handleNavClick(link)}
+                  className={`px-5 py-2 rounded-lg font-mono text-xs uppercase tracking-widest transition-all ${
+                    isActive(link.path) ? 'text-magenta bg-magenta/5 border border-magenta/20' : 'text-subtext hover:text-white'
+                  }`}
+                >
+                  {link.name}
+                </button>
               ) : (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                    isActive(link.path)
-                      ? 'text-primary-400 bg-primary-500/10'
-                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  className={`px-5 py-2 rounded-lg font-mono text-xs uppercase tracking-widest transition-all ${
+                    isActive(link.path) ? 'text-magenta bg-magenta/5 border border-magenta/20' : 'text-subtext hover:text-white'
                   }`}
                 >
                   {link.name}
-                  {isActive(link.path) && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary-400 rounded-full"
-                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                    />
-                  )}
                 </Link>
               )
             )}
           </div>
 
-          {/* CTA */}
-          <div className="hidden md:flex items-center space-x-3">
-            <Link to="/predictor" className="btn-primary text-sm px-5 py-2.5">
-              <Zap className="h-4 w-4 mr-1.5" />
+          {/* Action */}
+          <div className="flex items-center gap-4">
+            <Link to="/predictor" className="hidden md:block btn-neon-cyan !py-2 !px-6 text-xs !rounded-lg">
               Predict Salary
             </Link>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden p-2 text-white hover:bg-white/5 rounded-lg"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
-
-          {/* Mobile toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition-all"
-          >
-            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-dark-950/95 backdrop-blur-2xl border-t border-white/[0.06]"
-          >
-            <div className="px-4 py-4 space-y-1">
-              {navLinks.map((link) =>
-                link.children ? (
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden glass-panel mx-4 mt-2 overflow-hidden border-white/10"
+            >
+              <div className="p-4 space-y-2">
+                {navLinks.map((link) => (
                   <div key={link.name}>
-                    <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">{link.name}</div>
-                    {link.children.map((child) => (
-                      <Link
-                        key={child.path}
-                        to={child.path}
-                        className={`flex items-center space-x-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                          isActive(child.path)
-                            ? 'text-primary-400 bg-primary-500/10'
-                            : 'text-gray-400 hover:text-white hover:bg-white/5'
-                        }`}
+                    {link.children ? (
+                      <div className="space-y-1">
+                        <div className="px-4 py-2 text-[10px] font-mono text-subtext uppercase tracking-widest">{link.name}</div>
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.path}
+                            to={child.path}
+                            className="flex items-center gap-4 p-4 rounded-xl hover:bg-white/5"
+                          >
+                            <span>{child.icon}</span>
+                            <span className="text-sm font-bold">{child.name}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : link.hash ? (
+                      <button
+                        onClick={() => handleNavClick(link)}
+                        className="block px-4 py-3 rounded-xl hover:bg-white/5 text-sm font-bold w-full text-left"
                       >
-                        <span>{child.icon}</span>
-                        <span>{child.name}</span>
+                        {link.name}
+                      </button>
+                    ) : (
+                      <Link
+                        to={link.path}
+                        className="block px-4 py-3 rounded-xl hover:bg-white/5 text-sm font-bold"
+                      >
+                        {link.name}
                       </Link>
-                    ))}
+                    )}
                   </div>
-                ) : (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                      isActive(link.path)
-                        ? 'text-primary-400 bg-primary-500/10'
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                )
-              )}
-              <div className="pt-2">
-                <Link to="/predictor" className="btn-primary w-full text-sm py-3">
-                  <Zap className="h-4 w-4 mr-2" />
-                  Predict Salary
-                </Link>
+                ))}
+                <div className="pt-4 px-4 pb-2">
+                  <Link to="/predictor" className="btn-neon-cyan block text-center">Predict Salary</Link>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.nav>
+    </>
   );
 };
 

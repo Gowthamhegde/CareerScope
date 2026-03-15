@@ -5,7 +5,20 @@ import { Toaster } from 'react-hot-toast'
 import App from './App.jsx'
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+/* ✅ FIX #12: Add global error handler to prevent white screen */
+window.onerror = function(msg, url, lineNo, columnNo, error) {
+  console.error('Global error:', msg, error);
+  return false;
+};
+
+/* ✅ FIX #13: Ensure root element exists before rendering */
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  document.body.innerHTML = '<div style="color:red;padding:20px;font-family:monospace;">Error: Root element not found</div>';
+  throw new Error('Root element not found');
+}
+
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />

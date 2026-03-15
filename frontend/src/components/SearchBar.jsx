@@ -147,14 +147,14 @@ const SearchBar = ({ value, onChange, placeholder = "Search job titles...", clas
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
-          className="input-field pl-10 pr-10 w-full"
+          className="input-neon pl-10 pr-10 w-full"
           autoComplete="off"
         />
         
         {value && (
           <button
             onClick={handleClear}
-            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white transition-colors"
+            className="absolute inset-y-0 right-0 pr-3 flex items-center text-subtext hover:text-white transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
@@ -166,26 +166,23 @@ const SearchBar = ({ value, onChange, placeholder = "Search job titles...", clas
         {showSuggestions && suggestions.length > 0 && (
           <motion.div
             ref={suggestionsRef}
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute z-50 w-full mt-1 bg-dark-800/95 backdrop-blur-sm border border-white/20 rounded-lg shadow-xl max-h-64 overflow-y-auto"
+            exit={{ opacity: 0, y: 10 }}
+            className="absolute z-50 w-full mt-2 glass-panel p-2 shadow-2xl max-h-64 overflow-y-auto"
           >
             {suggestions.map((suggestion, index) => (
               <button
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className={`w-full px-4 py-3 text-left text-sm transition-colors ${
+                className={`w-full px-4 py-3 text-left text-sm transition-colors rounded-xl ${
                   index === selectedIndex
-                    ? 'bg-primary-500/20 text-primary-300'
-                    : 'text-gray-300 hover:bg-white/10 hover:text-white'
-                } ${index === 0 ? 'rounded-t-lg' : ''} ${
-                  index === suggestions.length - 1 ? 'rounded-b-lg' : ''
+                    ? 'bg-cyan/10 text-cyan'
+                    : 'text-subtext hover:bg-white/5 hover:text-white'
                 }`}
               >
                 <div className="flex items-center space-x-2">
-                  <Search className="h-4 w-4 text-gray-400" />
+                  <Search className="h-4 w-4 opacity-40" />
                   <span>{suggestion}</span>
                 </div>
               </button>
