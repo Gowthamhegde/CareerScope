@@ -15,11 +15,30 @@ const app = express();
 
 // Middleware
 app.use(helmet());
+
+// CORS configuration
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://currierscope.vercel.app',
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? [process.env.FRONTEND_URL || 'https://your-app.vercel.app']
-    : ['http://localhost:3000', 'http://localhost:5173'],
-  credentials: true
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    // Check if origin is allowed
+    if (allowedOrigins.some(allowed => origin.startsWith(allowed.replace('*', '')))) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow all origins in production for now
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(morgan('combined'));
 app.use(express.json({ limit: '10mb' }));
