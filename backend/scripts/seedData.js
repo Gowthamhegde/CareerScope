@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-dotenv.config();
+const path = require('path');
+
+// Load .env from backend directory
+dotenv.config({ path: path.join(__dirname, '../.env') });
+
 const Job = require('../models/Job');
 
 const getSkills = (title) => {

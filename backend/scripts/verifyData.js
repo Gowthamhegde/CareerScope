@@ -1,12 +1,21 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const path = require('path');
 const Job = require('../models/Job');
 
-dotenv.config();
+// Load .env from backend directory
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 async function verifyData() {
   try {
     console.log('🔌 Connecting to MongoDB Atlas...');
+    
+    if (!process.env.MONGO_URI) {
+      console.error('❌ MONGO_URI not found in environment variables!');
+      console.error('   Make sure backend/.env file exists with MONGO_URI');
+      process.exit(1);
+    }
+    
     console.log(`Connection string: ${process.env.MONGO_URI.replace(/:[^:@]+@/, ':****@')}`);
     
     await mongoose.connect(process.env.MONGO_URI);

@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
 
-dotenv.config();
+// Load .env from backend directory
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 // Simple Job schema
 const jobSchema = new mongoose.Schema({
@@ -51,7 +52,14 @@ const getCategory = (title) => {
 
 async function importData() {
   try {
-    console.log('🔌 Connecting to MongoDB...');
+    console.log('🔌 Connecting to MongoDB Atlas...');
+    
+    if (!process.env.MONGO_URI) {
+      console.error('❌ MONGO_URI not found in environment variables!');
+      console.error('   Make sure backend/.env file exists with MONGO_URI');
+      process.exit(1);
+    }
+    
     await mongoose.connect(process.env.MONGO_URI);
     console.log('✅ Connected to MongoDB');
 
