@@ -177,9 +177,52 @@ const getJobTitles = async (req, res) => {
   }
 };
 
+// Get job statistics
+const getStats = async (req, res) => {
+  try {
+    const [totalJobs, avgSalary, categories, experienceLevels] = await Promise.all([
+      Job.countDocuments(),
+      Job.aggregate([{ $group: { _id: null, avgSalary: { $avg: '$salaryUSD' } } }]),
+      Job.distinct('category'),
+      Job.aggregate([
+        {
+          $group: {
+            _id: '$experienceLevel',
+            count: { $sum: 1 },
+            avgSalary: { $avg: '$salaryUSD' }
+          }
+        },
+        { $sort: { count: -1 } }
+      ])
+    ]);
+
+    res.json({
+      success: true,
+      data: {
+        totalJobs,
+        avgSalary: Math.round(avgSalary[0]?.avgSalary || 0),
+        totalCategories: categories.length,
+        experienceLevels: experienceLevels.map(level => ({
+          level: level._id,
+          count: level.count,
+          avgSalary: Math.round(level.avgSalary)
+        }))
+      }
+    });
+  } catch (error) {
+    console.error('Get stats error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error while fetching stats',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   getJobs,
   getJobById,
   getCategories,
-  getJobTitles
+  getJobTitles,
+  getStats
 };

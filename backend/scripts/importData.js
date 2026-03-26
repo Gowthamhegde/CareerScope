@@ -286,52 +286,33 @@ const importData = async () => {
     console.log('🧹 Clearing existing data...');
     await Job.deleteMany({});
     
-    // Try multiple file paths and formats
-    const filePaths = [
-      { path: path.join(__dirname, '../../Salary Dataset.csv'), type: 'excel' },
-      { path: path.join(__dirname, '../../indian_salary_data.csv'), type: 'csv' },
-      { path: path.join(__dirname, '../../sample_salary_data.csv'), type: 'csv' },
-    ];
+    // Prioritize indian_salary_data.csv
+    const csvPath = path.join(__dirname, '../../indian_salary_data.csv');
     
-    let data = null;
-    let usedFile = null;
-    
-    for (const file of filePaths) {
-      if (fs.existsSync(file.path)) {
-        console.log(`📖 Trying to read file: ${path.basename(file.path)}`);
-        
-        if (file.type === 'excel') {
-          data = readExcelFile(file.path);
-        } else {
-          try {
-            data = await readCSVFile(file.path);
-          } catch (error) {
-            console.log(`❌ Failed to read CSV: ${error.message}`);
-            continue;
-          }
-        }
-        
-        if (data && data.length > 0) {
-          usedFile = file;
-          break;
-        }
-      }
-    }
-    
-    if (!data || data.length === 0) {
-      console.log('⚠️  No valid data found, generating sample data...');
+    if (!fs.existsSync(csvPath)) {
+      console.log('⚠️  indian_salary_data.csv not found, generating sample data...');
       const sampleData = generateSampleData();
-      
-      console.log(`📊 Importing ${sampleData.length} sample records...`);
       await Job.insertMany(sampleData);
       console.log('✅ Sample data imported successfully!');
-      
       await printSummary();
       process.exit(0);
       return;
     }
     
-    console.log(`📊 Processing ${data.length} records from ${path.basename(usedFile.path)}...`);
+    console.log(`📖 Reading file: indian_salary_data.csv`);
+    const data = await readCSVFile(csvPath);
+    
+    if (!data || data.length === 0) {
+      console.log('⚠️  No data found in CSV, generating sample data...');
+      const sampleData = generateSampleData();
+      await Job.insertMany(sampleData);
+      console.log('✅ Sample data imported successfully!');
+      await printSummary();
+      process.exit(0);
+      return;
+    }
+    
+    console.log(`📊 Processing ${data.length} records from indian_salary_data.csv...`);
     
     const jobs = [];
     let processedCount = 0;
@@ -340,36 +321,20 @@ const importData = async () => {
       try {
         processedCount++;
         
-        // Map different possible column names from the Excel/CSV file
+        // Parse the CSV row - exact column names from indian_salary_data.csv
         const job = {
-          jobTitle: row['job_title'] || row['Job Title'] || row['title'] || row['Job_Title'] || row['Role'] || 'Unknown',
-          salaryUSD: parseInt(row['salary_in_usd'] || row['Salary in USD'] || row['salary_usd'] || row['Salary_USD'] || row['salary'] || '50000'),
-          experienceLevel: mapExperienceLevel(row['experience_level'] || row['Experience Level'] || row['Experience_Level'] || row['Experience_Level'] || 'EN'),
-          employmentType: mapEmploymentType(row['employment_type'] || row['Employment Type'] || row['Employment_Type'] || 'FT'),
-          companySize: mapCompanySize(row['company_size'] || row['Company Size'] || row['Company_Size'] || 'M'),
-          companyLocation: row['company_location'] || row['Company Location'] || row['Company_Location'] || row['company_country'] || row['City'] || 'India',
-          remoteRatio: parseInt(row['remote_ratio'] || row['Remote Ratio'] || row['Remote_Ratio'] || '0'),
-          workYear: parseInt(row['work_year'] || row['Work Year'] || row['Work_Year'] || '2024'),
-          employeeResidence: row['employee_residence'] || row['Employee Residence'] || row['Employee_Residence'] || row['City'] || 'India',
-          salaryInLocalCurrency: parseInt(row['salary'] || row['salary_in_usd'] || row['Salary in Local Currency'] || row['salary_local'] || '800000'),
-          localCurrency: row['salary_currency'] || row['Local Currency'] || row['Currency'] || 'INR'
+          jobTitle: row['job_title'] || 'Unknown',
+          salaryUSD: parseInt(row['salary_in_usd']) || 0,
+          experienceLevel: mapExperienceLevel(row['experience_level'] || 'EN'),
+          employmentType: mapEmploymentType(row['employment_type'] || 'FT'),
+          companySize: mapCompanySize(row['company_size'] || 'M'),
+          companyLocation: row['company_location'] || 'IN',
+          remoteRatio: parseInt(row['remote_ratio']) || 0,
+          workYear: parseInt(row['work_year']) || 2024,
+          employeeResidence: row['employee_residence'] || 'IN',
+          salaryInLocalCurrency: parseInt(row['salary']) || 0,
+          localCurrency: row['salary_currency'] || 'INR'
         };
-        
-        // Handle LPA (Lakhs Per Annum) format from Indian datasets
-        if (row['Avg_Salary_LPA'] || row['Min_Salary_LPA'] || row['Max_Salary_LPA']) {
-          const avgLPA = parseFloat(row['Avg_Salary_LPA'] || row['Min_Salary_LPA'] || '8');
-          job.salaryInLocalCurrency = Math.round(avgLPA * 100000); // Convert LPA to INR
-          job.salaryUSD = Math.round(job.salaryInLocalCurrency / 83); // Convert to USD
-          job.localCurrency = 'INR';
-          job.companyLocation = row['City'] || 'India';
-          job.employeeResidence = row['City'] || 'India';
-        }
-        
-        // Convert USD to INR if the salary is in USD
-        if (job.localCurrency === 'USD' && job.salaryInLocalCurrency === job.salaryUSD) {
-          job.salaryInLocalCurrency = Math.round(job.salaryUSD * 83); // Convert to INR
-          job.localCurrency = 'INR';
-        }
         
         // Derive skills and category
         job.skills = getSkillsFromJobTitle(job.jobTitle);
@@ -386,7 +351,7 @@ const importData = async () => {
     }
     
     if (jobs.length === 0) {
-      console.log('⚠️  No valid data found, generating sample data...');
+      console.log('⚠️  No valid data processed, generating sample data...');
       const sampleData = generateSampleData();
       await Job.insertMany(sampleData);
       console.log('✅ Sample data imported successfully!');

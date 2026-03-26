@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: careerscope-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: careerscope_db
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - careerscope-network
+
+  backend:
+    build: ./backend
+    container_name: careerscope-backend
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/careerscope_db
+      - PORT=5001
+      - NODE_ENV=development
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - careerscope-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  careerscope-network:
+    driver: bridge
