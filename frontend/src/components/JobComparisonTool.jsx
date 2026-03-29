@@ -216,7 +216,7 @@ const JobComparisonTool = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">
             <h2 className="text-5xl md:text-7xl mb-6">
-              Job <span className="text-cyan text-stroke-white text-transparent">Comparison</span>
+              Job <span className="text-cyan text-stroke-outline">Comparison</span>
             </h2>
             <p className="text-subtext text-xl font-light">
               Don't just choose a job. Choose a transformation. Compare up to 4 offers side-by-side with our advanced scoring engine.

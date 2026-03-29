@@ -16,7 +16,10 @@ import {
   Calculator,
   MapPin,
   Users,
-  ChevronRight
+  ChevronRight,
+  FileText,
+  MessageSquare,
+  Briefcase
 } from 'lucide-react';
 import SearchBar from '../components/SearchBar';
 import JobComparisonTool from '../components/JobComparisonTool';
@@ -60,10 +63,15 @@ const Home = () => {
   };
 
   const tools = [
-    { icon: Target, label: 'Salary Predictor', desc: 'AI-powered CTC prediction', path: '/predictor', color: 'from-cyan/20 to-cyan/5', glow: 'var(--accent)', badge: 'AI Powered', span: 'col-span-2' },
+    { icon: Target, label: 'Salary Predictor', desc: 'Data-driven CTC prediction', path: '/predictor', color: 'from-cyan/20 to-cyan/5', glow: 'var(--accent)', badge: 'Smart' },
     { icon: Calculator, label: 'CTC Calculator', desc: 'Detailed salary breakdown', path: '/calculator', color: 'from-magenta/20 to-magenta/5', glow: 'var(--pop)', badge: 'Tax Optimized' },
     { icon: MapPin, label: 'City Comparison', desc: 'Compare across Indian cities', path: '/city-comparison', color: 'from-blue-500/20 to-blue-500/5', glow: '#3b82f6', badge: '6 Cities' },
-    { icon: Brain, label: 'Skills Analysis', desc: 'Gap analysis & learning path', path: '/skills-analysis', color: 'from-purple-500/20 to-purple-500/5', glow: '#a855f7', badge: 'Personalized', span: 'col-span-2' },
+    { icon: Brain, label: 'Skills Analysis', desc: 'Gap analysis & learning path', path: '/skills-analysis', color: 'from-purple-500/20 to-purple-500/5', glow: '#a855f7', badge: 'Personalized' },
+    { icon: Users, label: 'Career Advisor', desc: 'Solve real career problems', path: '/career-advisor', color: 'from-yellow-500/20 to-yellow-500/5', glow: '#eab308', badge: '6 Scenarios' },
+    { icon: FileText, label: 'Offer Analyzer', desc: 'Analyze job offers instantly', path: '/offer-analyzer', color: 'from-green-500/20 to-green-500/5', glow: '#22c55e', badge: 'Red Flags' },
+    { icon: TrendingUp, label: 'Resume Estimator', desc: 'Know your market value', path: '/resume-estimator', color: 'from-orange-500/20 to-orange-500/5', glow: '#f97316', badge: 'Instant' },
+    { icon: MessageSquare, label: 'Interview Prep', desc: 'Salary negotiation tips', path: '/interview-prep', color: 'from-pink-500/20 to-pink-500/5', glow: '#ec4899', badge: 'Scripts' },
+    { icon: Briefcase, label: 'Freelance Calculator', desc: 'Calculate freelance rates', path: '/freelance-calculator', color: 'from-indigo-500/20 to-indigo-500/5', glow: '#6366f1', badge: 'Pricing' },
   ];
 
   const statItems = [
@@ -85,12 +93,12 @@ const Home = () => {
           >
             <div className="inline-block px-4 py-1 border border-cyan/30 bg-cyan/10 rounded-full mb-8">
               <span className="text-xs font-mono text-cyan tracking-widest uppercase flex items-center gap-2">
-                <Sparkles size={14} /> AI-Powered Career Intelligence Platform
+                <Sparkles size={14} /> Career Intelligence Platform
               </span>
             </div>
 
             <h1 className="text-6xl md:text-[9rem] leading-[0.85] mb-8 max-w-5xl">
-              Know Your <span className="text-stroke-white text-transparent">Worth.</span><br />
+              Know Your <span className="text-stroke-outline">Worth.</span><br />
               <span className="gradient-text">Navigate Your Career.</span>
             </h1>
 
@@ -179,11 +187,11 @@ const Home = () => {
               <span className="text-magenta neon-text">to Succeed</span>
             </h2>
             <p className="text-subtext text-xl max-w-2xl font-light">
-              Four powerful tools to help you make smarter career decisions and maximize your earning potential.
+              Nine powerful tools to help you make smarter career decisions and maximize your earning potential.
             </p>
           </div>
 
-          <div className="bento-grid">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {tools.map((tool, i) => (
               <motion.div
                 key={tool.path}
@@ -191,21 +199,20 @@ const Home = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className={tool.span || ''}
               >
-                <Link to={tool.path} className="glass-panel-hover glass-panel p-10 block h-full group">
-                  <div className="flex justify-between items-start mb-12">
-                    <div className="p-4 rounded-2xl bg-white/5 group-hover:bg-white/10 transition-colors">
-                      <tool.icon size={32} className="text-white" />
+                <Link to={tool.path} className="glass-panel-hover glass-panel p-8 block h-full group">
+                  <div className="flex justify-between items-start mb-8">
+                    <div className="p-3 rounded-2xl bg-white/5 group-hover:bg-white/10 transition-colors">
+                      <tool.icon size={28} className="text-white" />
                     </div>
                     <span className="font-mono text-[10px] uppercase tracking-tighter px-2 py-1 border border-white/10 rounded">
                       {tool.badge}
                     </span>
                   </div>
-                  <h3 className="text-3xl mb-4 group-hover:text-cyan transition-colors">{tool.label}</h3>
-                  <p className="text-subtext font-light mb-8 group-hover:text-white transition-colors">{tool.desc}</p>
+                  <h3 className="text-2xl mb-3 group-hover:text-cyan transition-colors">{tool.label}</h3>
+                  <p className="text-subtext font-light text-sm mb-6 group-hover:text-white transition-colors">{tool.desc}</p>
                   <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cyan opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0">
-                    Launch Module <ChevronRight size={14} />
+                    Launch <ChevronRight size={14} />
                   </div>
                 </Link>
               </motion.div>
@@ -272,7 +279,7 @@ const Home = () => {
             </div>
             <h2 className="text-5xl md:text-8xl mb-8 leading-none">Ready to Discover<br /><span className="text-cyan italic">Your Worth?</span></h2>
             <p className="text-subtext text-xl mb-12 max-w-2xl mx-auto font-light">
-              Join thousands of professionals who have unlocked their career potential with CareerScope's AI-powered insights.
+              Join thousands of professionals who have unlocked their career potential with CareerScope's data-driven insights.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <Link to="/predictor" className="btn-neon-cyan text-lg px-12 py-6">Calculate Your CTC</Link>

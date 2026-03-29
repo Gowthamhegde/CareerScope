@@ -1,20 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Zap, ChevronDown } from 'lucide-react';
+import { Menu, X, Zap, ChevronDown, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
   { name: 'Home', path: '/' },
   { name: 'Explore Jobs', path: '/explore' },
-  {
-    name: 'Tools',
-    children: [
-      { name: 'Salary Predictor', path: '/predictor', icon: '🎯', desc: 'AI-powered CTC prediction' },
-      { name: 'CTC Calculator', path: '/calculator', icon: '🧮', desc: 'Detailed salary breakdown' },
-      { name: 'City Comparison', path: '/city-comparison', icon: '🏙️', desc: 'Compare Indian cities' },
-      { name: 'Skills Analysis', path: '/skills-analysis', icon: '🧠', desc: 'Gap analysis & learning' },
-    ]
-  },
   { name: 'Dashboard', path: '/dashboard' },
   { name: 'Compare', path: '/', hash: 'compare-jobs' },
 ];
@@ -22,6 +14,7 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   useEffect(() => {
@@ -134,6 +127,19 @@ const Navbar = () => {
 
           {/* Action */}
           <div className="flex items-center gap-4">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg bg-surface/50 hover:bg-surface transition-all border border-white/10 hover:border-cyan/30"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun size={20} className="text-cyan" />
+              ) : (
+                <Moon size={20} className="text-cyan" />
+              )}
+            </button>
+            
             <Link to="/predictor" className="hidden md:block btn-neon-cyan !py-2 !px-6 text-xs !rounded-lg">
               Predict Salary
             </Link>
@@ -189,6 +195,27 @@ const Navbar = () => {
                     )}
                   </div>
                 ))}
+                
+                {/* Theme Toggle in Mobile Menu */}
+                <div className="pt-4 px-4 border-t border-white/10">
+                  <button
+                    onClick={toggleTheme}
+                    className="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-white/5 text-sm font-bold"
+                  >
+                    {theme === 'dark' ? (
+                      <>
+                        <Sun size={20} className="text-cyan" />
+                        <span>Light Mode</span>
+                      </>
+                    ) : (
+                      <>
+                        <Moon size={20} className="text-cyan" />
+                        <span>Dark Mode</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+                
                 <div className="pt-4 px-4 pb-2">
                   <Link to="/predictor" className="btn-neon-cyan block text-center">Predict Salary</Link>
                 </div>

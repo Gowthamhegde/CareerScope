@@ -11,6 +11,11 @@ import SalaryCalculator from './pages/SalaryCalculator';
 import CityComparison from './pages/CityComparison';
 import SkillsAnalysis from './pages/SkillsAnalysis';
 import Dashboard from './pages/Dashboard';
+import CareerAdvisor from './pages/CareerAdvisor';
+import OfferAnalyzer from './pages/OfferAnalyzer';
+import ResumeSalaryEstimator from './pages/ResumeSalaryEstimator';
+import InterviewPrep from './pages/InterviewPrep';
+import FreelanceCalculator from './pages/FreelanceCalculator';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -38,6 +43,11 @@ function App() {
             <Route path="/city-comparison" element={<CityComparison />} />
             <Route path="/skills-analysis" element={<SkillsAnalysis />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/career-advisor" element={<CareerAdvisor />} />
+            <Route path="/offer-analyzer" element={<OfferAnalyzer />} />
+            <Route path="/resume-estimator" element={<ResumeSalaryEstimator />} />
+            <Route path="/interview-prep" element={<InterviewPrep />} />
+            <Route path="/freelance-calculator" element={<FreelanceCalculator />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

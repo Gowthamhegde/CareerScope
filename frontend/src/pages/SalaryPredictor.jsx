@@ -20,7 +20,7 @@ const SalaryPredictor = () => {
         >
           <div className="inline-flex items-center space-x-2 bg-primary-500/10 border border-primary-500/20 rounded-full px-4 py-2 mb-6">
             <Sparkles className="h-4 w-4 text-primary-400" />
-            <span className="text-sm text-primary-300">AI-Powered Prediction</span>
+            <span className="text-sm text-primary-300">Smart Salary Prediction</span>
           </div>
 
           <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">
@@ -43,7 +43,7 @@ const SalaryPredictor = () => {
           <div className="glass-card p-6 text-center">
             <Brain className="h-12 w-12 text-primary-400 mx-auto mb-4" />
             <h3 className="text-lg font-heading font-semibold text-white mb-2">
-              AI-Powered Analysis
+              Smart Analysis
             </h3>
             <p className="text-gray-400 text-sm">
               Our machine learning model analyzes thousands of data points to provide accurate predictions

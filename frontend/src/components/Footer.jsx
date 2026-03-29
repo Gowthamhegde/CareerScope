@@ -30,7 +30,7 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-subtext text-xl font-light leading-relaxed max-w-md mb-8">
-              Know your worth. Navigate your career with data-driven salary insights and AI-powered predictions built on real market data.
+              Know your worth. Navigate your career with data-driven salary insights and smart predictions built on real market data.
             </p>
             <div className="flex gap-4">
               {[Github, Twitter, Linkedin].map((Icon, i) => (
@@ -79,9 +79,9 @@ const Footer = () => {
         </div>
 
         <div className="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-white/20 text-sm font-mono">© {year} CAREERSCOPE_SYSTEMS. ALL RIGHTS RESERVED.</p>
-          <div className="flex items-center gap-2 text-white/20 text-sm font-mono">
-             BUILT BY <span className="text-magenta font-bold">ANTIGRAVITY</span> /// 00110001
+          <p className="text-white/20 text-sm font-mono">© {year} CareerScope. All rights reserved.</p>
+          <div className="flex items-center gap-2 text-white/20 text-sm">
+            Made with ❤️ for career growth
           </div>
         </div>
       </div>
