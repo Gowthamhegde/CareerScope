@@ -20,6 +20,8 @@ import {
 } from 'lucide-react';
 import SearchBar from '../components/SearchBar';
 import JobComparisonTool from '../components/JobComparisonTool';
+import { DisplayAd } from '../components/AdSense';
+import { MultiplexAd } from '../components/AdSense';
 import { formatCurrency, formatNumber } from '../utils/currency';
 import api from '../api/axios';
 
@@ -247,9 +249,19 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ── Ad Placement ── */}
+      <div className="max-w-7xl mx-auto px-6">
+        <DisplayAd slot="1275578947" />
+      </div>
+
       {/* ── CTA ── */}
       {/* Job Comparison Tool */}
       <JobComparisonTool />
+
+      {/* ── Multiplex Ad (Related Content) ── */}
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <MultiplexAd slot="1084007256" />
+      </div>
 
       <section className="py-40 px-6 text-center">
         <div className="max-w-4xl mx-auto relative group">
