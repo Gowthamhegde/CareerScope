@@ -1,4 +1,4 @@
-const Job = require('../models/Job');
+const SupabaseJob = require('../models/SupabaseJob');
 
 // Get all jobs with filtering, pagination, and search
 const getJobs = async (req, res) => {
@@ -11,65 +11,42 @@ const getJobs = async (req, res) => {
       companySize,
       remoteRatio,
       category,
-      sortBy = 'salaryUSD',
-      order = 'desc'
+      sortBy = 'salary_usd',
+      order = 'desc',
+      companyLocation
     } = req.query;
 
-    // Build filter object
-    const filter = {};
+    // Build filters
+    const filters = {};
     
     if (search) {
-      filter.jobTitle = { $regex: search, $options: 'i' };
+      filters.job_title = search;
     }
     
     if (experienceLevel) {
-      filter.experienceLevel = { $in: experienceLevel.split(',') };
-    }
-    
-    if (companySize) {
-      filter.companySize = { $in: companySize.split(',') };
-    }
-    
-    if (remoteRatio !== undefined) {
-      filter.remoteRatio = parseInt(remoteRatio);
+      filters.experience_level = experienceLevel;
     }
     
     if (category) {
-      filter.category = { $in: category.split(',') };
+      filters.category = category;
     }
 
-    if (req.query.companyLocation) {
-      filter.companyLocation = { $in: req.query.companyLocation.split(',') };
+    if (companyLocation) {
+      filters.company_location = companyLocation;
     }
 
-    // Build sort object
-    const sortOrder = order === 'desc' ? -1 : 1;
-    const sort = { [sortBy]: sortOrder };
-
-    // Execute query with pagination
-    const skip = (parseInt(page) - 1) * parseInt(limit);
-    
-    const [jobs, totalJobs] = await Promise.all([
-      Job.find(filter)
-        .sort(sort)
-        .skip(skip)
-        .limit(parseInt(limit))
-        .lean(),
-      Job.countDocuments(filter)
-    ]);
-
-    const totalPages = Math.ceil(totalJobs / parseInt(limit));
+    const result = await SupabaseJob.findAll({
+      page: parseInt(page),
+      limit: parseInt(limit),
+      sortBy,
+      sortOrder: order,
+      filters
+    });
 
     res.json({
       success: true,
-      data: jobs,
-      pagination: {
-        currentPage: parseInt(page),
-        totalPages,
-        totalJobs,
-        hasNextPage: parseInt(page) < totalPages,
-        hasPrevPage: parseInt(page) > 1
-      }
+      data: result.data,
+      pagination: result.pagination
     });
   } catch (error) {
     console.error('Get jobs error:', error);
@@ -84,7 +61,7 @@ const getJobs = async (req, res) => {
 // Get single job by ID
 const getJobById = async (req, res) => {
   try {
-    const job = await Job.findById(req.params.id).lean();
+    const job = await SupabaseJob.findById(req.params.id);
     
     if (!job) {
       return res.status(404).json({
@@ -94,20 +71,19 @@ const getJobById = async (req, res) => {
     }
 
     // Get similar jobs (same category, similar experience level)
-    const similarJobs = await Job.find({
-      _id: { $ne: job._id },
-      category: job.category,
-      experienceLevel: job.experienceLevel
-    })
-    .sort({ salaryUSD: -1 })
-    .limit(6)
-    .lean();
+    const { data: similarJobs } = await SupabaseJob.findAll({
+      limit: 6,
+      filters: {
+        category: job.category,
+        experience_level: job.experience_level
+      }
+    });
 
     res.json({
       success: true,
       data: {
         job,
-        similarJobs
+        similarJobs: similarJobs.filter(j => j.id !== job.id)
       }
     });
   } catch (error) {
@@ -123,27 +99,8 @@ const getJobById = async (req, res) => {
 // Get all job categories with counts
 const getCategories = async (req, res) => {
   try {
-    const categories = await Job.aggregate([
-      {
-        $group: {
-          _id: '$category',
-          count: { $sum: 1 },
-          avgSalary: { $avg: '$salaryUSD' }
-        }
-      },
-      {
-        $sort: { count: -1 }
-      },
-      {
-        $project: {
-          category: '$_id',
-          count: 1,
-          avgSalary: { $round: ['$avgSalary', 0] },
-          _id: 0
-        }
-      }
-    ]);
-
+    const categories = await SupabaseJob.getDistinctValues('category');
+    
     res.json({
       success: true,
       data: categories
@@ -161,7 +118,7 @@ const getCategories = async (req, res) => {
 // Get all unique job titles for autocomplete
 const getJobTitles = async (req, res) => {
   try {
-    const titles = await Job.distinct('jobTitle');
+    const titles = await SupabaseJob.getDistinctValues('job_title');
     
     res.json({
       success: true,
@@ -180,34 +137,11 @@ const getJobTitles = async (req, res) => {
 // Get job statistics
 const getStats = async (req, res) => {
   try {
-    const [totalJobs, avgSalary, categories, experienceLevels] = await Promise.all([
-      Job.countDocuments(),
-      Job.aggregate([{ $group: { _id: null, avgSalary: { $avg: '$salaryUSD' } } }]),
-      Job.distinct('category'),
-      Job.aggregate([
-        {
-          $group: {
-            _id: '$experienceLevel',
-            count: { $sum: 1 },
-            avgSalary: { $avg: '$salaryUSD' }
-          }
-        },
-        { $sort: { count: -1 } }
-      ])
-    ]);
-
+    const stats = await SupabaseJob.getStats();
+    
     res.json({
       success: true,
-      data: {
-        totalJobs,
-        avgSalary: Math.round(avgSalary[0]?.avgSalary || 0),
-        totalCategories: categories.length,
-        experienceLevels: experienceLevels.map(level => ({
-          level: level._id,
-          count: level.count,
-          avgSalary: Math.round(level.avgSalary)
-        }))
-      }
+      data: stats
     });
   } catch (error) {
     console.error('Get stats error:', error);

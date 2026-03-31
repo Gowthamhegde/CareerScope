@@ -3,13 +3,21 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const supabase = require('./config/supabase');
 
 // Load environment variables
 dotenv.config();
 
-// Connect to MongoDB
-connectDB();
+// Test Supabase connection
+(async () => {
+  try {
+    const { error } = await supabase.from('jobs').select('count', { count: 'exact', head: true });
+    if (error) throw error;
+    console.log('✅ Connected to Supabase');
+  } catch (error) {
+    console.error('❌ Supabase connection failed:', error.message);
+  }
+})();
 
 const app = express();
 
