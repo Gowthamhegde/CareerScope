@@ -26,7 +26,7 @@ const JobExplorer = () => {
 
   // Search and filter state
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
-  const [sortBy, setSortBy] = useState(searchParams.get('sortBy') || 'salaryUSD');
+  const [sortBy, setSortBy] = useState(searchParams.get('sortBy') || 'salary_usd');
   const [sortOrder, setSortOrder] = useState(searchParams.get('order') || 'desc');
   const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get('page')) || 1);
   
@@ -44,14 +44,14 @@ const JobExplorer = () => {
   });
 
   const sortOptions = [
-    { value: 'salaryInLocalCurrency', label: 'Salary (Local)', icon: '💰' },
-    { value: 'salaryUSD', label: 'Salary (USD)', icon: '💵' },
-    { value: 'workYear', label: 'Year', icon: '📅' },
-    { value: 'jobTitle', label: 'Job Title', icon: '📝' },
-    { value: 'companyLocation', label: 'Location', icon: '📍' },
-    { value: 'experienceLevel', label: 'Experience', icon: '⭐' },
-    { value: 'remoteRatio', label: 'Remote Work', icon: '🌐' },
-    { value: 'createdAt', label: 'Recently Added', icon: '🆕' },
+    { value: 'salary_local', label: 'Salary (Local)', icon: '💰' },
+    { value: 'salary_usd', label: 'Salary (USD)', icon: '💵' },
+    { value: 'work_year', label: 'Year', icon: '📅' },
+    { value: 'job_title', label: 'Job Title', icon: '📝' },
+    { value: 'company_location', label: 'Location', icon: '📍' },
+    { value: 'experience_level', label: 'Experience', icon: '⭐' },
+    { value: 'remote_ratio', label: 'Remote Work', icon: '🌐' },
+    { value: 'created_at', label: 'Recently Added', icon: '🆕' },
   ];
 
   // Update URL params when filters change
@@ -59,7 +59,7 @@ const JobExplorer = () => {
     const params = new URLSearchParams();
     
     if (searchQuery) params.set('search', searchQuery);
-    if (sortBy !== 'salaryUSD') params.set('sortBy', sortBy);
+    if (sortBy !== 'salary_usd') params.set('sortBy', sortBy);
     if (sortOrder !== 'desc') params.set('order', sortOrder);
     if (currentPage !== 1) params.set('page', currentPage.toString());
     
