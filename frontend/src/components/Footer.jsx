@@ -26,7 +26,7 @@ const Footer = () => {
                 <Zap size={22} fill="currentColor" />
               </div>
               <span className="text-3xl font-heading tracking-tighter text-white uppercase">
-                CAREER<span className="text-cyan italic">SCOPE</span>
+                SALARY<span className="text-cyan italic">PREDICTOR</span>
               </span>
             </Link>
             <p className="text-subtext text-xl font-light leading-relaxed max-w-md mb-8">
