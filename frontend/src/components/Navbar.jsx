@@ -67,7 +67,7 @@ const Navbar = () => {
               <Zap size={20} fill="currentColor" />
             </motion.div>
             <span className="text-2xl font-heading tracking-tighter text-white">
-              CAREER<span className="text-cyan italic">SCOPE</span>
+              SALARY<span className="text-cyan italic">PREDICTOR</span>
             </span>
           </Link>
 
