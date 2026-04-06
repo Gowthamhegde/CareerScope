@@ -79,7 +79,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-white/20 text-sm font-mono">© {year} CareerScope. All rights reserved.</p>
+          <p className="text-white/20 text-sm font-mono">© {year} SalaryPredictor. All rights reserved.</p>
           <div className="flex items-center gap-2 text-white/20 text-sm">
             Made with ❤️ for career growth
           </div>

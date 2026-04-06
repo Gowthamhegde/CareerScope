@@ -1,13 +1,13 @@
 # Fix Vercel Deployment Issue
 
 ## Problem
-The Vercel project `currierscope` has an incorrect Root Directory setting pointing to `frontend/frontend` instead of `.` (current directory).
+The Vercel project `salarypredictor` has an incorrect Root Directory setting pointing to `frontend/frontend` instead of `.` (current directory).
 
 ## Solution
 
 ### Option 1: Fix via Vercel Dashboard (Recommended)
 
-1. Go to: https://vercel.com/gowthamhegdes-projects/currierscope/settings
+1. Go to: https://vercel.com/gowthamhegdes-projects/salarypredictor/settings
 2. Scroll to "Root Directory"
 3. Change from `frontend` to `.` (dot - meaning current directory)
 4. Click "Save"
@@ -29,7 +29,7 @@ If you want to start fresh:
    ```
 3. When prompted:
    - Link to existing project? **No**
-   - Project name: **currierscope** (or new name)
+   - Project name: **salarypredictor** (or new name)
    - Root directory: **. (current directory)**
    - Build settings: Use detected settings
 
@@ -48,7 +48,7 @@ If you want to start fresh:
 ## Current Setup
 
 ### Working URLs
-- **Frontend**: https://currierscope.vercel.app (needs redeploy with correct env)
+- **Frontend**: https://salarypredictor.vercel.app (needs redeploy with correct env)
 - **Backend**: https://careerscope-4vvf.onrender.com/api ✅
 - **Database**: Supabase ✅
 
@@ -62,10 +62,10 @@ VITE_API_URL=https://careerscope-4vvf.onrender.com/api
 Test the deployment:
 ```bash
 # Test frontend
-curl https://currierscope.vercel.app
+curl https://salarypredictor.vercel.app
 
 # Test API connection from frontend
-# Open browser console on https://currierscope.vercel.app
+# Open browser console on https://salarypredictor.vercel.app
 # Check if API calls are going to the correct backend
 ```
 
@@ -79,7 +79,7 @@ curl https://careerscope-4vvf.onrender.com/api/health
 curl https://careerscope-4vvf.onrender.com/api/jobs/stats
 
 # Test frontend loads
-curl -I https://currierscope.vercel.app
+curl -I https://salarypredictor.vercel.app
 ```
 
 ## Alternative: Deploy from Root

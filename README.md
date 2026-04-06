@@ -1,4 +1,4 @@
-# CareerScope - Career Salary Intelligence Platform
+# SalaryPredictor - Career Salary Intelligence Platform
 
 A comprehensive, production-grade web application that provides data-driven salary insights, career exploration, and AI-powered salary predictions. Built with the MERN stack (MongoDB, Express.js, React, Node.js).
 
@@ -40,7 +40,7 @@ A comprehensive, production-grade web application that provides data-driven sala
 ## 📁 Project Structure
 
 ```
-careerscope/
+salarypredictor/
 ├── backend/
 │   ├── server.js              # Express server setup
 │   ├── .env                   # Environment variables
@@ -85,7 +85,7 @@ careerscope/
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd careerscope
+   cd salarypredictor
    ```
 
 2. **Install backend dependencies**
@@ -104,14 +104,14 @@ careerscope/
    
    Create a `.env` file in the `backend` directory:
    ```env
-   MONGO_URI=mongodb://localhost:27017/careerscope_db
+   MONGO_URI=mongodb://localhost:27017/salarypredictor_db
    PORT=5000
    NODE_ENV=development
    ```
 
    For MongoDB Atlas (cloud database):
    ```env
-   MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/careerscope_db
+   MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/salarypredictor_db
    PORT=5000
    NODE_ENV=development
    ```
@@ -274,7 +274,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Support
 
-For support, email support@careerscope.com or create an issue in the repository.
+For support, email support@salarypredictor.ai or create an issue in the repository.
 
 ---
 

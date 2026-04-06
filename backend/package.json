@@ -1,7 +1,7 @@
 {
-  "name": "careerscope-backend",
+  "name": "salarypredictor-backend",
   "version": "1.0.0",
-  "description": "CareerScope Backend API",
+  "description": "SalaryPredictor Backend API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -30,6 +30,6 @@
     "salary",
     "api"
   ],
-  "author": "CareerScope Team",
+  "author": "SalaryPredictor Team",
   "license": "MIT"
 }

@@ -279,7 +279,7 @@ const Home = () => {
             </div>
             <h2 className="text-5xl md:text-8xl mb-8 leading-none">Ready to Discover<br /><span className="text-cyan italic">Your Worth?</span></h2>
             <p className="text-subtext text-xl mb-12 max-w-2xl mx-auto font-light">
-              Join thousands of professionals who have unlocked their career potential with CareerScope's data-driven insights.
+              Join thousands of professionals who have unlocked their career potential with SalaryPredictor's data-driven insights.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <Link to="/predictor" className="btn-neon-cyan text-lg px-12 py-6">Calculate Your CTC</Link>

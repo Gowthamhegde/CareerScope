@@ -6,7 +6,7 @@
 **Error**: "The provided path does not exist"
 
 **Fix**:
-1. Go to: https://vercel.com/gowthamhegdes-projects/currierscope/settings/general
+1. Go to: https://vercel.com/gowthamhegdes-projects/salarypredictor/settings/general
 2. Find "Root Directory"
 3. Set it to: `.` (just a dot, meaning current directory)
 4. Click Save
@@ -15,7 +15,7 @@
 **Error**: "Command failed" or "npm run build failed"
 
 **Fix in Vercel Dashboard**:
-1. Go to: https://vercel.com/gowthamhegdes-projects/currierscope/settings/general
+1. Go to: https://vercel.com/gowthamhegdes-projects/salarypredictor/settings/general
 2. Build & Development Settings:
    - Framework Preset: `Vite`
    - Build Command: `npm run build`
@@ -26,7 +26,7 @@
 **Error**: API calls failing or undefined variables
 
 **Fix**:
-1. Go to: https://vercel.com/gowthamhegdes-projects/currierscope/settings/environment-variables
+1. Go to: https://vercel.com/gowthamhegdes-projects/salarypredictor/settings/environment-variables
 2. Add:
    - Name: `VITE_API_URL`
    - Value: `https://careerscope-4vvf.onrender.com/api`
@@ -103,7 +103,7 @@ If this works, the build should work on Vercel.
 
 If build still fails:
 
-1. Go to: https://vercel.com/gowthamhegdes-projects/currierscope
+1. Go to: https://vercel.com/gowthamhegdes-projects/salarypredictor
 2. Click on the failed deployment
 3. Click "View Build Logs"
 4. Look for the specific error message
@@ -163,10 +163,10 @@ If build still fails:
 
 ```bash
 # Test if site loads
-curl -I https://currierscope.vercel.app
+curl -I https://salarypredictor.vercel.app
 
 # Test if API connection works
-# Open browser console at https://currierscope.vercel.app
+# Open browser console at https://salarypredictor.vercel.app
 # Check Network tab for API calls
 ```
 

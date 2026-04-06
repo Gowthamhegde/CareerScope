@@ -3,25 +3,25 @@ version: '3.8'
 services:
   mongodb:
     image: mongo:7.0
-    container_name: careerscope-mongodb
+    container_name: salarypredictor-mongodb
     restart: unless-stopped
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_DATABASE: careerscope_db
+      MONGO_INITDB_DATABASE: salarypredictor_db
     volumes:
       - mongodb_data:/data/db
     networks:
-      - careerscope-network
+      - salarypredictor-network
 
   backend:
     build: ./backend
-    container_name: careerscope-backend
+    container_name: salarypredictor-backend
     restart: unless-stopped
     ports:
       - "5001:5001"
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/careerscope_db
+      - MONGO_URI=mongodb://mongodb:27017/salarypredictor_db
       - PORT=5001
       - NODE_ENV=development
     depends_on:
@@ -30,11 +30,11 @@ services:
       - ./backend:/app
       - /app/node_modules
     networks:
-      - careerscope-network
+      - salarypredictor-network
 
 volumes:
   mongodb_data:
 
 networks:
-  careerscope-network:
+  salarypredictor-network:
     driver: bridge

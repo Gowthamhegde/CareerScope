@@ -70,8 +70,8 @@ const JobComparisonTool = () => {
 
   // Load from localStorage
   useEffect(() => {
-    const savedJobs = localStorage.getItem('careerscope_comparison_jobs');
-    const savedWeights = localStorage.getItem('careerscope_comparison_weights');
+    const savedJobs = localStorage.getItem('salarypredictor_comparison_jobs');
+    const savedWeights = localStorage.getItem('salarypredictor_comparison_weights');
     if (savedJobs) setJobs(JSON.parse(savedJobs));
     else setJobs([{ ...INITIAL_JOB, id: Date.now() }, { ...INITIAL_JOB, id: Date.now() + 1 }]);
     if (savedWeights) setWeights(JSON.parse(savedWeights));
@@ -79,8 +79,8 @@ const JobComparisonTool = () => {
 
   // Save to localStorage
   useEffect(() => {
-    localStorage.setItem('careerscope_comparison_jobs', JSON.stringify(jobs));
-    localStorage.setItem('careerscope_comparison_weights', JSON.stringify(weights));
+    localStorage.setItem('salarypredictor_comparison_jobs', JSON.stringify(jobs));
+    localStorage.setItem('salarypredictor_comparison_weights', JSON.stringify(weights));
   }, [jobs, weights]);
 
   const addJob = () => {
