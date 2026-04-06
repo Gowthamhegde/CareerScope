@@ -1,14 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // Display Ad Component (Responsive)
 export const DisplayAd = ({ slot, format = 'auto', responsive = true }) => {
+  const [adError, setAdError] = useState(false);
+
   useEffect(() => {
     try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      // Check if adsbygoogle is available
+      if (typeof window !== 'undefined' && window.adsbygoogle) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
     } catch (err) {
       console.error('AdSense error:', err);
+      setAdError(true);
     }
   }, []);
+
+  // Don't render anything if there's an error
+  if (adError) return null;
 
   return (
     <div className="adsense-container my-4">
@@ -26,13 +35,20 @@ export const DisplayAd = ({ slot, format = 'auto', responsive = true }) => {
 
 // In-Article Ad Component
 export const InArticleAd = ({ slot }) => {
+  const [adError, setAdError] = useState(false);
+
   useEffect(() => {
     try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      if (typeof window !== 'undefined' && window.adsbygoogle) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
     } catch (err) {
       console.error('AdSense error:', err);
+      setAdError(true);
     }
   }, []);
+
+  if (adError) return null;
 
   return (
     <div className="adsense-container my-6">
@@ -50,13 +66,20 @@ export const InArticleAd = ({ slot }) => {
 
 // Sidebar Ad Component
 export const SidebarAd = ({ slot }) => {
+  const [adError, setAdError] = useState(false);
+
   useEffect(() => {
     try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      if (typeof window !== 'undefined' && window.adsbygoogle) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
     } catch (err) {
       console.error('AdSense error:', err);
+      setAdError(true);
     }
   }, []);
+
+  if (adError) return null;
 
   return (
     <div className="adsense-container sticky top-4">
@@ -74,13 +97,20 @@ export const SidebarAd = ({ slot }) => {
 
 // Horizontal Banner Ad
 export const BannerAd = ({ slot }) => {
+  const [adError, setAdError] = useState(false);
+
   useEffect(() => {
     try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      if (typeof window !== 'undefined' && window.adsbygoogle) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
     } catch (err) {
       console.error('AdSense error:', err);
+      setAdError(true);
     }
   }, []);
+
+  if (adError) return null;
 
   return (
     <div className="adsense-container my-4 flex justify-center">
@@ -96,13 +126,20 @@ export const BannerAd = ({ slot }) => {
 
 // Multiplex Ad (Related Content)
 export const MultiplexAd = ({ slot }) => {
+  const [adError, setAdError] = useState(false);
+
   useEffect(() => {
     try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      if (typeof window !== 'undefined' && window.adsbygoogle) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      }
     } catch (err) {
       console.error('AdSense error:', err);
+      setAdError(true);
     }
   }, []);
+
+  if (adError) return null;
 
   return (
     <div className="adsense-container my-6">

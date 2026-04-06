@@ -3,14 +3,9 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   TrendingUp,
-  Globe,
-  Building2,
   Search,
-  BarChart3,
   Target,
-  ArrowRight,
   Sparkles,
-  Database,
   Brain,
   Zap,
   Calculator,
@@ -21,10 +16,8 @@ import {
   MessageSquare,
   Briefcase
 } from 'lucide-react';
-import SearchBar from '../components/SearchBar';
 import JobComparisonTool from '../components/JobComparisonTool';
 import { DisplayAd } from '../components/AdSense';
-import { MultiplexAd } from '../components/AdSense';
 import { formatCurrency, formatNumber } from '../utils/currency';
 import api from '../api/axios';
 
@@ -98,12 +91,12 @@ const Home = () => {
             </div>
 
             <h1 className="text-6xl md:text-[9rem] leading-[0.85] mb-8 max-w-5xl">
-              Know Your <span className="text-stroke-outline">Worth.</span><br />
-              <span className="gradient-text">Navigate Your Career.</span>
+              Predict Your <span className="text-stroke-outline">Salary</span><br />
+              <span className="gradient-text">Instantly with Smart AI.</span>
             </h1>
 
             <p className="text-xl md:text-2xl text-subtext max-w-2xl mb-12 font-light">
-              Unlock data-driven salary insights, explore career opportunities, and predict your earning potential with precision.
+              Get accurate salary predictions based on your skills, experience, and market data. Free AI-powered tool for career growth.
             </p>
 
             <div className="flex flex-wrap gap-6 items-center">
@@ -261,16 +254,13 @@ const Home = () => {
         <DisplayAd slot="1275578947" />
       </div>
 
+      {/* ── Job Comparison Tool ── */}
+      <section className="py-24">
+        <JobComparisonTool />
+      </section>
+
       {/* ── CTA ── */}
-      {/* Job Comparison Tool */}
-      <JobComparisonTool />
-
-      {/* ── Multiplex Ad (Related Content) ── */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <MultiplexAd slot="1084007256" />
-      </div>
-
-      <section className="py-40 px-6 text-center">
+      <section className="pt-0 pb-24 px-6 text-center">
         <div className="max-w-4xl mx-auto relative group">
           <div className="absolute -inset-4 bg-gradient-to-r from-cyan/20 via-magenta/20 to-cyan/20 rounded-[40px] blur-3xl opacity-50 group-hover:opacity-100 transition duration-1000"></div>
           <div className="glass-panel p-20 relative overflow-hidden">
