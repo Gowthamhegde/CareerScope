@@ -1,7 +1,7 @@
 export const seoConfig = {
   siteName: 'SalaryPredictor.ai',
-  siteUrl: 'https://salarypredictor.ai',
-  defaultTitle: 'AI Salary Predictor – Predict Your Salary Instantly with Smart AI',
+  siteUrl: 'https://currierscope.vercel.app',
+  defaultTitle: 'AI Salary Predictor – Predict Your Salary Instantly with Smart AI | SalaryPredictor',
   defaultDescription: 'Predict your salary instantly with SalaryPredictor.ai. Our AI-powered tool gives accurate salary estimates based on skills, experience, and global market data. Free and fast.',
   defaultOGImage: '/images/og-default.jpg',
   twitterHandle: '@salarypredictor',
@@ -83,14 +83,42 @@ export const seoConfig = {
     },
     
     careerAdvisor: {
-      title: 'Career Advisor – Expert Career Guidance & Salary Insights',
-      description: 'Get expert career advice, salary negotiation tips, and career growth strategies. Navigate your career with data-driven insights.',
+      title: 'AI Salary Predictor – Predict Your Salary Instantly with Smart AI | SalaryPredictor',
+      description: 'Predict your salary instantly with SalaryPredictor.ai. Our AI-powered tool gives accurate salary estimates based on skills, experience, and global market data. Free and fast.',
       keywords: [
-        'career advisor',
-        'career guidance',
-        'salary negotiation',
-        'career growth',
-        'career tips'
+        'salary predictor',
+        'AI salary predictor',
+        'salary prediction tool',
+        'salary calculator AI',
+        'expected salary checker',
+        'salary estimator',
+        'career salary tool'
+      ],
+      h1: 'AI Salary Predictor',
+      h2: [
+        'Predict Your Salary in Seconds',
+        'How Our AI Salary Predictor Works',
+        'Accurate Salary Insights for Every Career',
+        'Compare Salaries Across Countries',
+        'Why Use SalaryPredictor.ai'
+      ],
+      faq: [
+        {
+          question: 'What is a salary predictor?',
+          answer: 'A salary predictor is an AI-based tool that estimates your expected salary based on your skills, experience, and job role. It uses real market data and machine learning algorithms to provide accurate salary predictions.'
+        },
+        {
+          question: 'Is SalaryPredictor.ai free?',
+          answer: 'Yes, SalaryPredictor.ai is completely free to use. You can predict salaries, compare roles, and access all our tools without any cost or subscription.'
+        },
+        {
+          question: 'How accurate is the salary prediction?',
+          answer: 'Our salary predictions are highly accurate as they use real market data and AI models trained on thousands of salary data points. The accuracy depends on the completeness of the information you provide.'
+        },
+        {
+          question: 'Can I compare salaries globally?',
+          answer: 'Yes, you can compare salaries across countries and roles. Our tool provides salary data for multiple countries including USA, India, UK, Canada, Australia, and more.'
+        }
       ]
     },
     

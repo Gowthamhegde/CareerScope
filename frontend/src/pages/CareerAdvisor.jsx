@@ -5,15 +5,20 @@ import {
   TrendingUp,
   DollarSign,
   MapPin,
-  Clock,
   Target,
   AlertCircle,
   CheckCircle,
   ArrowRight,
   Lightbulb,
   BookOpen,
-  Users
+  Users,
+  Globe,
+  Zap,
+  Award
 } from 'lucide-react';
+import SEOHead from '../components/SEO/SEOHead';
+import SchemaMarkup from '../components/SEO/SchemaMarkup';
+import { seoConfig } from '../data/seoConfig';
 
 const CareerAdvisor = () => {
   const [selectedProblem, setSelectedProblem] = useState(null);
@@ -308,27 +313,282 @@ const CareerAdvisor = () => {
     }
   ];
 
+  const pageConfig = seoConfig.pages.careerAdvisor;
+
   return (
-    <div className="min-h-screen pt-32 pb-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-16"
-        >
-          <div className="inline-block px-4 py-1 border border-cyan/30 bg-cyan/10 rounded-full mb-6">
-            <span className="text-xs font-mono text-cyan tracking-widest uppercase flex items-center gap-2">
-              <Lightbulb size={14} /> Real-World Career Solutions
-            </span>
-          </div>
-          <h1 className="text-5xl md:text-7xl mb-6">
-            Solve Your <span className="gradient-text">Career Problems</span>
-          </h1>
-          <p className="text-xl text-subtext max-w-3xl">
-            Practical, actionable advice for common career challenges faced by professionals in India.
-          </p>
-        </motion.div>
+    <>
+      {/* SEO Head */}
+      <SEOHead
+        title={pageConfig.title}
+        description={pageConfig.description}
+        keywords={pageConfig.keywords}
+        canonicalUrl={`${seoConfig.siteUrl}/career-advisor`}
+      />
+
+      {/* FAQ Schema */}
+      <SchemaMarkup
+        type="FAQ"
+        data={{ questions: pageConfig.faq }}
+      />
+
+      <div className="min-h-screen pt-32 pb-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          {/* Header with SEO-optimized content */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-16"
+          >
+            <div className="inline-block px-4 py-1 border border-cyan/30 bg-cyan/10 rounded-full mb-6">
+              <span className="text-xs font-mono text-cyan tracking-widest uppercase flex items-center gap-2">
+                <Zap size={14} /> Free AI-Powered Tool
+              </span>
+            </div>
+            
+            {/* H1 - Main SEO Heading */}
+            <h1 className="text-5xl md:text-7xl mb-6">
+              {pageConfig.h1}
+            </h1>
+            
+            <p className="text-xl text-subtext max-w-3xl mb-8">
+              {pageConfig.description}
+            </p>
+
+            {/* Key Features */}
+            <div className="grid md:grid-cols-3 gap-4 mb-12">
+              <div className="glass-panel p-4 flex items-center gap-3">
+                <Zap className="text-cyan" size={24} />
+                <span className="text-sm">Instant Predictions</span>
+              </div>
+              <div className="glass-panel p-4 flex items-center gap-3">
+                <Globe className="text-magenta" size={24} />
+                <span className="text-sm">Global Market Data</span>
+              </div>
+              <div className="glass-panel p-4 flex items-center gap-3">
+                <Award className="text-cyan" size={24} />
+                <span className="text-sm">100% Free Forever</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* H2 Section 1: Predict Your Salary in Seconds */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-16"
+          >
+            <h2 className="text-4xl font-heading mb-6">{pageConfig.h2[0]}</h2>
+            <p className="text-subtext text-lg mb-6">
+              Stop guessing your worth. Our AI salary predictor analyzes thousands of data points 
+              to give you accurate salary estimates based on your skills, experience, and location.
+            </p>
+            <a href="/predictor" className="btn-neon-cyan inline-flex items-center gap-2">
+              Try Salary Predictor Now <ArrowRight size={16} />
+            </a>
+          </motion.section>
+
+          {/* H2 Section 2: How Our AI Salary Predictor Works */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mb-16"
+          >
+            <h2 className="text-4xl font-heading mb-8">{pageConfig.h2[1]}</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="glass-panel p-6">
+                <div className="w-12 h-12 rounded-xl bg-cyan/20 flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-cyan">1</span>
+                </div>
+                <h3 className="text-xl font-heading mb-3">Enter Your Details</h3>
+                <p className="text-subtext">
+                  Provide your job role, experience, skills, and location. The more details, the more accurate.
+                </p>
+              </div>
+              <div className="glass-panel p-6">
+                <div className="w-12 h-12 rounded-xl bg-magenta/20 flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-magenta">2</span>
+                </div>
+                <h3 className="text-xl font-heading mb-3">AI Analysis</h3>
+                <p className="text-subtext">
+                  Our AI compares your profile against real market data from thousands of salaries worldwide.
+                </p>
+              </div>
+              <div className="glass-panel p-6">
+                <div className="w-12 h-12 rounded-xl bg-cyan/20 flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-cyan">3</span>
+                </div>
+                <h3 className="text-xl font-heading mb-3">Get Results</h3>
+                <p className="text-subtext">
+                  Receive your predicted salary range, market insights, and personalized recommendations.
+                </p>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* H2 Section 3: Accurate Salary Insights for Every Career */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mb-16"
+          >
+            <h2 className="text-4xl font-heading mb-6">{pageConfig.h2[2]}</h2>
+            <p className="text-subtext text-lg mb-8">
+              Whether you're a software engineer, data scientist, designer, or marketing professional, 
+              our tool provides accurate salary predictions for every career path.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="glass-panel p-6">
+                <h3 className="text-xl font-heading mb-4 text-cyan">Tech Roles</h3>
+                <ul className="space-y-2 text-subtext">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle size={16} className="text-cyan" />
+                    Software Engineer Salary
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle size={16} className="text-cyan" />
+                    Data Scientist Salary
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle size={16} className="text-cyan" />
+                    DevOps Engineer Salary
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle size={16} className="text-cyan" />
+                    AI/ML Engineer Salary
+                  </li>
+                </ul>
+              </div>
+              <div className="glass-panel p-6">
+                <h3 className="text-xl font-heading mb-4 text-magenta">Other Careers</h3>
+                <ul className="space-y-2 text-subtext">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle size={16} className="text-magenta" />
+                    Product Manager Salary
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle size={16} className="text-magenta" />
+                    UX Designer Salary
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle size={16} className="text-magenta" />
+                    Marketing Manager Salary
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle size={16} className="text-magenta" />
+                    Business Analyst Salary
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* H2 Section 4: Compare Salaries Across Countries */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mb-16"
+          >
+            <h2 className="text-4xl font-heading mb-6">{pageConfig.h2[3]}</h2>
+            <p className="text-subtext text-lg mb-6">
+              Planning to work abroad or relocate? Compare salaries across different countries 
+              and make informed decisions about your career moves.
+            </p>
+            <div className="grid md:grid-cols-4 gap-4">
+              {['USA', 'India', 'UK', 'Canada', 'Australia', 'Germany', 'Singapore', 'UAE'].map((country) => (
+                <div key={country} className="glass-panel p-4 text-center hover:scale-105 transition-transform">
+                  <Globe className="text-cyan mx-auto mb-2" size={24} />
+                  <span className="text-sm">{country}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6">
+              <a href="/city-comparison" className="btn-neon-magenta inline-flex items-center gap-2">
+                Compare Cities & Countries <ArrowRight size={16} />
+              </a>
+            </div>
+          </motion.section>
+
+          {/* H2 Section 5: Why Use SalaryPredictor.ai */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mb-16"
+          >
+            <h2 className="text-4xl font-heading mb-8">{pageConfig.h2[4]}</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="glass-panel p-6">
+                <CheckCircle className="text-cyan mb-4" size={32} />
+                <h3 className="text-xl font-heading mb-3">100% Free & No Sign-Up</h3>
+                <p className="text-subtext">
+                  Use all our tools completely free. No credit card, no registration, no hidden fees.
+                </p>
+              </div>
+              <div className="glass-panel p-6">
+                <CheckCircle className="text-cyan mb-4" size={32} />
+                <h3 className="text-xl font-heading mb-3">AI-Powered Accuracy</h3>
+                <p className="text-subtext">
+                  Our machine learning models are trained on thousands of real salary data points.
+                </p>
+              </div>
+              <div className="glass-panel p-6">
+                <CheckCircle className="text-cyan mb-4" size={32} />
+                <h3 className="text-xl font-heading mb-3">Real Market Data</h3>
+                <p className="text-subtext">
+                  We use actual salary data from companies worldwide, not estimates or guesses.
+                </p>
+              </div>
+              <div className="glass-panel p-6">
+                <CheckCircle className="text-cyan mb-4" size={32} />
+                <h3 className="text-xl font-heading mb-3">Instant Results</h3>
+                <p className="text-subtext">
+                  Get your salary prediction in seconds. No waiting, no delays.
+                </p>
+              </div>
+            </div>
+          </motion.section>
+
+          {/* FAQ Section */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mb-16"
+          >
+            <h2 className="text-4xl font-heading mb-8">Frequently Asked Questions</h2>
+            <div className="space-y-4">
+              {pageConfig.faq.map((item, index) => (
+                <div key={index} className="glass-panel p-6">
+                  <h3 className="text-xl font-heading mb-3 text-cyan">{item.question}</h3>
+                  <p className="text-subtext">{item.answer}</p>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* Career Problems Section */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="mb-12"
+          >
+            <div className="inline-block px-4 py-1 border border-cyan/30 bg-cyan/10 rounded-full mb-6">
+              <span className="text-xs font-mono text-cyan tracking-widest uppercase flex items-center gap-2">
+                <Lightbulb size={14} /> Career Guidance & Solutions
+              </span>
+            </div>
+            <h2 className="text-4xl font-heading mb-6">
+              Solve Your <span className="gradient-text">Career Problems</span>
+            </h2>
+            <p className="text-xl text-subtext max-w-3xl mb-8">
+              Practical, actionable advice for common career challenges faced by professionals.
+            </p>
+          </motion.section>
 
         {/* Problem Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -339,7 +599,7 @@ const CareerAdvisor = () => {
                 key={problem.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: 0.8 + index * 0.1 }}
                 onClick={() => setSelectedProblem(problem)}
                 className={`glass-panel p-8 text-left hover:scale-105 transition-all group ${
                   selectedProblem?.id === problem.id ? 'ring-2 ring-' + problem.color : ''
@@ -540,6 +800,7 @@ const CareerAdvisor = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 
