@@ -18,6 +18,8 @@ import InterviewPrep from './pages/InterviewPrep';
 import FreelanceCalculator from './pages/FreelanceCalculator';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import About from './pages/About';
+import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -52,6 +54,8 @@ function App() {
             <Route path="/freelance-calculator" element={<FreelanceCalculator />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

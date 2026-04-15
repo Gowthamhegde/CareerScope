@@ -21,7 +21,7 @@ const Footer = () => {
   return (
     <footer className="relative mt-40 border-t border-white/5 bg-surface-2/30">
       <div className="max-w-7xl mx-auto px-6 py-24">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center space-x-3 mb-8 group">
               <div className="w-10 h-10 bg-cyan text-bg rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(0,255,224,0.4)]">
@@ -72,26 +72,42 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
-              {['Privacy', 'Terms', 'Connect'].map((item) => (
-                <li key={item}>
-                  {item === 'Privacy' ? (
-                    <Link to="/privacy" className="text-subtext hover:text-white transition-colors font-bold flex items-center group">
-                      <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
-                      Privacy
-                    </Link>
-                  ) : item === 'Terms' ? (
-                    <Link to="/terms" className="text-subtext hover:text-white transition-colors font-bold flex items-center group">
-                      <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
-                      Terms
-                    </Link>
-                  ) : (
-                    <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-subtext hover:text-cyan transition-colors font-bold flex items-center group">
-                      <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
-                      Connect
-                    </a>
-                  )}
-                </li>
-              ))}
+              <li>
+                <Link to="/about" className="text-subtext hover:text-cyan transition-colors font-bold flex items-center group">
+                  <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-subtext hover:text-cyan transition-colors font-bold flex items-center group">
+                  <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-mono text-white/40 uppercase tracking-[0.2em] mb-8">Legal</h3>
+            <ul className="space-y-4">
+              <li>
+                <Link to="/privacy" className="text-subtext hover:text-white transition-colors font-bold flex items-center group">
+                  <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link to="/terms" className="text-subtext hover:text-white transition-colors font-bold flex items-center group">
+                  <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                  Terms
+                </Link>
+              </li>
+              <li>
+                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-subtext hover:text-cyan transition-colors font-bold flex items-center group">
+                  <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                  Connect
+                </a>
+              </li>
             </ul>
           </div>
         </div>
