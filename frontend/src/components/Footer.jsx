@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Zap, Github, Twitter, Linkedin, ArrowRight } from 'lucide-react';
 
+const GITHUB_URL = 'https://github.com/Gowthamhegde';
+
 const Footer = () => {
   const year = new Date().getFullYear();
 
@@ -33,11 +35,15 @@ const Footer = () => {
               Know your worth. Navigate your career with data-driven salary insights and smart predictions built on real market data.
             </p>
             <div className="flex gap-4">
-              {[Github, Twitter, Linkedin].map((Icon, i) => (
-                <a key={i} href="#" className="w-12 h-12 glass-panel flex items-center justify-center text-white hover:text-cyan hover:border-cyan/50 transition-all">
-                  <Icon size={20} />
-                </a>
-              ))}
+              <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="w-12 h-12 glass-panel flex items-center justify-center text-white hover:text-cyan hover:border-cyan/50 transition-all">
+                <Github size={20} />
+              </a>
+              <a href="#" className="w-12 h-12 glass-panel flex items-center justify-center text-white hover:text-cyan hover:border-cyan/50 transition-all">
+                <Twitter size={20} />
+              </a>
+              <a href="#" className="w-12 h-12 glass-panel flex items-center justify-center text-white hover:text-cyan hover:border-cyan/50 transition-all">
+                <Linkedin size={20} />
+              </a>
             </div>
           </div>
 
@@ -68,10 +74,22 @@ const Footer = () => {
               ))}
               {['Privacy', 'Terms', 'Connect'].map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-subtext hover:text-white transition-colors font-bold flex items-center group">
-                    <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
-                    {item}
-                  </a>
+                  {item === 'Privacy' ? (
+                    <Link to="/privacy" className="text-subtext hover:text-white transition-colors font-bold flex items-center group">
+                      <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                      Privacy
+                    </Link>
+                  ) : item === 'Terms' ? (
+                    <Link to="/terms" className="text-subtext hover:text-white transition-colors font-bold flex items-center group">
+                      <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                      Terms
+                    </Link>
+                  ) : (
+                    <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="text-subtext hover:text-cyan transition-colors font-bold flex items-center group">
+                      <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                      Connect
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

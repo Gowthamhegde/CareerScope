@@ -2,75 +2,101 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://salarypredictor.vercel.app/</loc>
+    <loc>https://salarypredictor.in/</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/predictor</loc>
+    <loc>https://salarypredictor.in/predictor</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/explore</loc>
+    <loc>https://salarypredictor.in/explore</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/dashboard</loc>
+    <loc>https://salarypredictor.in/dashboard</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/calculator</loc>
+    <loc>https://salarypredictor.in/calculator</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/city-comparison</loc>
+    <loc>https://salarypredictor.in/city-comparison</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/skills-analysis</loc>
+    <loc>https://salarypredictor.in/skills-analysis</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/career-advisor</loc>
+    <loc>https://salarypredictor.in/career-advisor</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/offer-analyzer</loc>
+    <loc>https://salarypredictor.in/offer-analyzer</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/resume-estimator</loc>
+    <loc>https://salarypredictor.in/resume-estimator</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/interview-prep</loc>
+    <loc>https://salarypredictor.in/interview-prep</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://salarypredictor.vercel.app/freelance-calculator</loc>
+    <loc>https://salarypredictor.in/freelance-calculator</loc>
+    <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://salarypredictor.in/privacy</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://salarypredictor.in/terms</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>

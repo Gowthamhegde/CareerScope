@@ -1,6 +1,6 @@
 export const seoConfig = {
   siteName: 'SalaryPredictor.ai',
-  siteUrl: 'https://salarypredictor.vercel.app',
+  siteUrl: 'https://salarypredictor.in',
   defaultTitle: 'AI Salary Predictor – Predict Your Salary Instantly with Smart AI | SalaryPredictor',
   defaultDescription: 'Predict your salary instantly with SalaryPredictor.ai. Our AI-powered tool gives accurate salary estimates based on skills, experience, and global market data. Free and fast.',
   defaultOGImage: '/images/og-default.jpg',
