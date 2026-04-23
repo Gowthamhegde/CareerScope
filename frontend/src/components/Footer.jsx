@@ -99,7 +99,7 @@ const Footer = () => {
               <li>
                 <Link to="/terms" className="text-subtext hover:text-white transition-colors font-bold flex items-center group">
                   <ArrowRight className="h-4 w-4 mr-2 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
-                  Terms
+                  Terms and condition
                 </Link>
               </li>
               <li>
