@@ -24,7 +24,7 @@ export const DisplayAd = ({ slot, format = 'auto', responsive = true }) => {
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-1914362395061589"
+        data-ad-client="ca-pub-1991868249892836"
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive={responsive.toString()}
@@ -55,7 +55,7 @@ export const InArticleAd = ({ slot }) => {
       <ins
         className="adsbygoogle"
         style={{ display: 'block', textAlign: 'center' }}
-        data-ad-client="ca-pub-1914362395061589"
+        data-ad-client="ca-pub-1991868249892836"
         data-ad-slot={slot}
         data-ad-format="fluid"
         data-ad-layout="in-article"
@@ -86,7 +86,7 @@ export const SidebarAd = ({ slot }) => {
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-1914362395061589"
+        data-ad-client="ca-pub-1991868249892836"
         data-ad-slot={slot}
         data-ad-format="auto"
         data-full-width-responsive="true"
@@ -117,7 +117,7 @@ export const BannerAd = ({ slot }) => {
       <ins
         className="adsbygoogle"
         style={{ display: 'inline-block', width: '728px', height: '90px' }}
-        data-ad-client="ca-pub-1914362395061589"
+        data-ad-client="ca-pub-1991868249892836"
         data-ad-slot={slot}
       ></ins>
     </div>
@@ -146,7 +146,7 @@ export const MultiplexAd = ({ slot }) => {
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-1914362395061589"
+        data-ad-client="ca-pub-1991868249892836"
         data-ad-slot={slot}
         data-ad-format="autorelaxed"
       ></ins>
